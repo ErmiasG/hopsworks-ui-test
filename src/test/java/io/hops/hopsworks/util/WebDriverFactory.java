@@ -37,9 +37,10 @@ import java.util.regex.Pattern;
 
 public class WebDriverFactory {
   private static final Logger LOGGER = Logger.getLogger(WebDriverFactory.class.getName());
-  private static final String GECKODRIVER_VERSION = "0.26.0";
+  private static final String GECKODRIVER_VERSION = "0.32.0";
   private static final String GECKODRIVER = "geckodriver";
   private static final String CHROMEDRIVER = "chromedriver";
+  //https://github.com/mozilla/geckodriver/releases/download/v0.32.0/geckodriver-v0.32.0-linux64.tar.gz
   private static final String GECKODRIVER_URL = "https://github.com/mozilla/geckodriver/releases/download/v"
     + GECKODRIVER_VERSION + "/geckodriver-v" + GECKODRIVER_VERSION + "-";
   private static final String CHROME_API = "https://chromedriver.storage.googleapis.com/";
@@ -54,10 +55,10 @@ public class WebDriverFactory {
   
   public static WebDriver getWebDriver() {
     WebDriver driver = null;
-    String downLoadsDir = FileUtils.getTempDirectory().toString() + "/webDrivers/";
+    String downLoadsDir = FileUtils.getTempDirectory() + "/webDrivers/";
     downloadDrivers(downLoadsDir);
     String chosenBrowser = System.getenv(BROWSER_ENV);
-    
+    System.out.println("chosenBrowser: " + chosenBrowser);
     if ("firefox".equalsIgnoreCase(chosenBrowser)) {
       File geekoDriver = new File(downLoadsDir + GECKODRIVER);
       if (geekoDriver.exists()) {

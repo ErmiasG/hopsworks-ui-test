@@ -1,6 +1,7 @@
 package io.hops.hopsworks.ui.login;
 
 import io.hops.hopsworks.util.WebDriverFactory;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -25,5 +26,12 @@ public class LoginIT {
     driver.findElement(By.name("email")).sendKeys("admin@hopsworks.ai");
     driver.findElement(By.name("password")).sendKeys("admin");
     driver.findElement(By.xpath("//button[text()='Login']")).submit();
+  }
+  
+  @After
+  public void tearDown() {
+    if (driver != null) {
+      driver.quit(); // close browser
+    }
   }
 }
